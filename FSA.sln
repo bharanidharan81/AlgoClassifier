@@ -21,6 +21,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FSA", "FSA\", "{BC4D1C1E-8F
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "62988"
+		SlnRelativePath = "FSA\"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
