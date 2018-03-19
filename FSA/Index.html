@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Projection by TEMPLATED</title>
+    <title>Feature selection process</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="css/main.css" rel="stylesheet" />
+    <!-- Scripts -->
+    <script src="Scripts/jquery-3.3.1.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -22,30 +24,28 @@
     <!-- Banner -->
     <section id="banner">
         <div class="inner">
-            <header>
+            <section>
                 <h1>Feature selection process</h1>
-            </header>           
+            </section>
         </div>
     </section>
-
-
     <!-- Three -->
-    <section id="three" class="wrapper align-center">
+    <section id="three" class="wrapper align-center" >        
         <div class="inner">
-            <div class="flex flex-2">
-                <div id="datasets">
-                    <div>
-                        <h2>Datasets</h2>
-                    </div>
-                    <table class="" align="center">
+            <div>
+                <div class="wrapper align-left">
+                    <h3>Datasets</h3>
+                </div>
+                <div id="datasets" class="wrapper align-center">
+                    <table>
                         <thead>
                             <tr>
-                                <td>sl no</td>
-                                <td>Dataset</td>
-                                <td>#Feature</td>
-                                <td>#Observations</td>
-                                <td>Download</td>
-                                <td>Statistical Analysis</td>
+                                <td><strong> sl no </strong></td>
+                                <td><strong>Dataset </strong></td>
+                                <td><strong>#Feature </strong></td>
+                                <td><strong>#Observations </strong></td>
+                                <td><strong>Download </strong></td>
+                                <td><strong>Statistical Analysis </strong></td>
                             </tr>
                         </thead>
                         <tr>
@@ -53,74 +53,84 @@
                             <td>ALLAML</td>
                             <td>7129</td>
                             <td>72</td>
-                            <td> <a href="#" class="button">Download link</a></td>
-                            <td> <a href="#" class="button">Picture link</a></td>
+                            <td> <input type="button" class="button" value="Download link" /></td>
+                            <td> <input type="button" class="button" value="Picture link" /></td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>ARCNENE</td>
                             <td>10000</td>
                             <td>200</td>
-                            <td> <a href="#" class="button">Download link</a></td>
-                            <td> <a href="#" class="button">Picture link</a></td>
+                            <td> <input type="button" class="button" value="Download link" /></td>
+                            <td> <input type="button" class="button" value="Picture link" /></td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>GLI-85</td>
                             <td>22283</td>
                             <td>85</td>
-                            <td> <a href="#" class="button">Download link</a></td>
-                            <td> <a href="#" class="button">Picture link</a></td>
+                            <td> <input type="button" class="button" value="Download link" /></td>
+                            <td> <input type="button" class="button" value="Picture link" /></td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>PROSTAT</td>
                             <td>5966</td>
                             <td>102</td>
-                            <td> <a href="#" class="button">Download link</a></td>
-                            <td> <a href="#" class="button">Picture link</a></td>
+                            <td> <input type="button" class="button" value="Download link" /></td>
+                            <td> <input type="button" class="button" value="Picture link" /></td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>SMK-CAN-1987</td>
                             <td>19993</td>
                             <td>87</td>
-                            <td> <a href="#" class="button">Download link</a></td>
-                            <td> <a href="#" class="button">Picture link</a></td>
+                            <td> <input type="button" class="button" value="Download link" /></td>
+                            <td> <input type="button" class="button" value="Picture link" /></td>
                         </tr>
                         <tfoot></tfoot>
                     </table>
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <div>
+                <div class="wrapper align-left">
+                    <h3> Software </h3>
                 </div>
                 <div>
-                    <h2> Software </h2>
-                    <div>
+                    <div class="wrapper align-left">
                         <h4> Feature selection algorithm </h4>
-                        <table align="center">
+                    </div>
+
+                    <div class="wrapper align-center">
+                        <table>
                             <tr>
                                 <td>
                                     ARRE Algorithm
                                 </td>
-                                <td>
-                                    <a href="#" class="button">Download</a>
-                                </td>
-                                <td> <a href="#" class="button">Algorithm analysis</a></td>
+                                <td> <input type="button" class="button" value="Download" /></td>
+                                <td> <input type="button" class="button" value="Algorithm analysis" /></td>
                             </tr>
                         </table>
                     </div>
-                    <div>
+                    <br />
+
+                    <div class="wrapper align-left">
                         <h4> Classification algorithm </h4>
-                        <table align="center">
+                    </div>
+                    <div class="wrapper align-center">
+                        <table>
                             <tr>
                                 <td>
                                     HSVM Classifier
                                 </td>
-                                <td>
-                                    <a href="#" class="button">Download</a>
-                                </td>
-                                <td> <a href="#" class="button">Algorithm analysis</a></td>
+                                <td> <input type="button" class="button" value="Download" /></td>
+                                <td> <input type="button" class="button" value="Algorithm analysis" /></td>
                             </tr>
                         </table>
                     </div>
+                    <br />
                 </div>
             </div>
         </div>
@@ -129,12 +139,24 @@
     <!-- Footer -->
     <footer id="footer">
         <div class="inner">
-            <h3>Thank you</h3>     
+            <h3>Thank you</h3>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="Scripts/jquery-3.3.1.js"></script>
+
+    <script type="text/javascript">
+        $(function ()
+        {
+            $('#imageDownLoad').click(function (e)
+            {
+                e.preventDefault();
+
+                window.location.href = url;
+
+            })
+
+        })
+    </script>
 
 </body>
 </html>
