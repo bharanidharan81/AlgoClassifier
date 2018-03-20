@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import url(font-awesome.min.css);
 @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600";
 
@@ -2916,15 +2916,17 @@
 /* Banner */
 
 	#banner {
-		padding: 8em 0 9em 0;
-		background-image: url(../../images/banner.jpg);
+		padding: 8em 0 9em 0;        
+		background-image: url(/images/banner5.jpg);
 		background-size: cover;
-		background-position: bottom;
+		background-position:  bottom;
 		background-attachment: fixed;
 		background-repeat: no-repeat;
 		text-align: center;
 		position: relative;
+        background-image:radial-gradient()
 	}
+
 
 		#banner:before {
 			content: '';
@@ -2936,12 +2938,13 @@
 			left: 0;
 		}
 
-		#banner .inner {
-			border-top: 2px solid rgba(255, 255, 255, 0.2);
-			position: relative;
-			z-index: 10005;
-			padding-top: 8em;
-		}
+        #banner .inner
+        {
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10005;
+            padding-top: 8em;
+        }
 
 		#banner h1 {
 			font-size: 3.5em;
