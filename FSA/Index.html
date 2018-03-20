@@ -4,9 +4,12 @@
     <title>Feature selection process</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="css/main.css" rel="stylesheet" />
+    <link href="CSS/main.css" rel="stylesheet" />
     <!-- Scripts -->
     <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/Download.js"></script>
+    <script src="Scripts/knockout-3.4.2.js"></script>
+    <script src="Scripts/FSA.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -30,7 +33,7 @@
         </div>
     </section>
     <!-- Three -->
-    <section id="three" class="wrapper align-center" >        
+    <section id="three" class="wrapper align-center">
         <div class="inner">
             <div>
                 <div class="wrapper align-left">
@@ -53,7 +56,7 @@
                             <td>ALLAML</td>
                             <td>7129</td>
                             <td>72</td>
-                            <td> <input id ="downloadALLAML" type="button" class="button" value="Download link" /></td>
+                            <td> <input data-bind="click: onDownloadClick" id="downloadALLAML" type="button" class="button" value="Download link" /></td>
                             <td> <input type="button" class="button" value="Picture link" /></td>
                         </tr>
                         <tr>
@@ -144,20 +147,45 @@
                 &copy;
             </div>
         </div>
-        
+
     </footer>
 
+    <div id="preparing-file-modal" title="Preparing report..." style="display: none;">
+        We are preparing your report, please wait...
+
+        <div class="ui-progressbar-value ui-corner-left ui-corner-right" style="width: 100%; height:22px; margin-top: 20px;"></div>
+    </div>
+
+    <div id="error-modal" title="Error" style="display: none;">
+        There was a problem generating your report, please try again.
+    </div>
 
     <script type="text/javascript">
         $(function ()
         {
-            $('#downloadALLAML').click(function (e)
+            $(document).on("click", "a.fileDownloadCustomRichExperience", function ()
             {
-                var url = "";
-                e.preventDefault();
-                window.location.href = url;
-            })
-        })
+
+                var $preparingFileModal = $("#preparing-file-modal");
+
+                $preparingFileModal.dialog({ modal: true });
+
+                $.fileDownload($(this).prop('href'), {
+                    successCallback: function (url)
+                    {
+
+                        $preparingFileModal.dialog('close');
+                    },
+                    failCallback: function (responseHtml, url)
+                    {
+
+                        $preparingFileModal.dialog('close');
+                        $("#error-modal").dialog({ modal: true });
+                    }
+                });
+                return false; //this is critical to stop the click event which will trigger a normal file download!
+            });
+        });
     </script>
 
 </body>
