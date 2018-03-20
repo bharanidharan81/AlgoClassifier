@@ -147,46 +147,6 @@
                 &copy;
             </div>
         </div>
-
     </footer>
-
-    <div id="preparing-file-modal" title="Preparing report..." style="display: none;">
-        We are preparing your report, please wait...
-
-        <div class="ui-progressbar-value ui-corner-left ui-corner-right" style="width: 100%; height:22px; margin-top: 20px;"></div>
-    </div>
-
-    <div id="error-modal" title="Error" style="display: none;">
-        There was a problem generating your report, please try again.
-    </div>
-
-    <script type="text/javascript">
-        $(function ()
-        {
-            $(document).on("click", "a.fileDownloadCustomRichExperience", function ()
-            {
-
-                var $preparingFileModal = $("#preparing-file-modal");
-
-                $preparingFileModal.dialog({ modal: true });
-
-                $.fileDownload($(this).prop('href'), {
-                    successCallback: function (url)
-                    {
-
-                        $preparingFileModal.dialog('close');
-                    },
-                    failCallback: function (responseHtml, url)
-                    {
-
-                        $preparingFileModal.dialog('close');
-                        $("#error-modal").dialog({ modal: true });
-                    }
-                });
-                return false; //this is critical to stop the click event which will trigger a normal file download!
-            });
-        });
-    </script>
-
 </body>
 </html>
