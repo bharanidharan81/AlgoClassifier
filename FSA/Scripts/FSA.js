@@ -64,7 +64,7 @@
         Below example, you can pass multiple namespace arguments, which 
         will take care creating the namespaces.
 
-        Skelta.CreateNamespace("Skelta.Utils", "Skelta.Forms.Core.Controls");
+        FSA.CreateNamespace("FSA.Utils", "Skelta.Forms.Core.Controls");
 
         After the creation of the namespaces, you can use it as "Skelta.Forms.GetNamespaceString() or 
         Skelta.Forms.GetLongNamespaceString()" which will return the value as "Skelta.Forms". If you 
@@ -99,25 +99,47 @@
             ////};
         }
 
-        FSA.BaseClass.prototype = FSA.BaseClass;       
+        FSA.BaseClass.prototype = FSA.BaseClass;
 
     })();
 }
 
 
 $(function ()
-{   
-    debugger;
+{
     window.FSA = window.FSA || new FsaNamespace(null, "FSA");
 
     function Utilities()
     {
-        FSA.BaseClass.call(this, FSA, "Utilities");
+        FSA.BaseClass.call(this, FSA, "Utilities");       
     }
+
+    Utilities.Data = (function ()
+    {
+        var sampleData = {
+            Datasets: [
+                { "slno": 1, "Dataset": "ALLAML", "Feature": "7129", "Observations": "72", "Download": "Download.zip", "StatisticalAnalysis": "ALLAML.jpg" },
+                { "slno": 2, "Dataset": "ARCNENE", "Feature": "10000", "Observations": "200", "Download": "ARCNENE.zip", "StatisticalAnalysis": "ARCNENE.jpg" },
+                { "slno": 3, "Dataset": "GLI-85", "Feature": "22283", "Observations": "85", "Download": "GLI85.zip", "StatisticalAnalysis": "GLI.jpg" },
+                { "slno": 4, "Dataset": "PROSTAT", "Feature": "5966", "Observations": "102", "Download": "PROSTAT.zip", "StatisticalAnalysis": "PROSTAT.jpg" },
+                { "slno": 5, "Dataset": "SMK-CAN-1987", "Feature": "19993", "Observations": "87", "Download": "SMKCAN1987.zip", "StatisticalAnalysis": "SMKCAN1987.jpg" }
+            ],
+
+            FeatureAlgorithm: [
+                { "Name": "ARRE Algorithm", "DownloadLink": "ARREAlgorithm.zip", "AnalysisLink": "ARREAlgorithm.jpg" }
+            ],
+
+            ClassificationAlgorithm: [
+                { "Name": "HSVM Classifier", "DownloadLink": "HSVMClassifier.zip", "AnalysisLink": "HSVMClassifier.jpg" }
+            ]
+        }; 
+
+        return sampleData;
+       
+    })();
 
     Utilities.prototype.downloadFile = function (sUrl)
     {
-        debugger;
         if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1 ||
             navigator.userAgent.toLowerCase().indexOf('safari') > -1)
         {
@@ -138,61 +160,65 @@ $(function ()
         }
         var query = '?download';
         window.open(sUrl + query, '_self');
-    };    
+    };
+
+    Utilities.prototype.ShowPicture = function (url)
+    {
+        debugger;
+        var link = document.createElement("a");
+        $(link).click(function (e)
+        {
+            e.preventDefault();
+            window.open(url, 'popupwindow', 'scrollbars,resizable');
+        });
+        $(link).click();
+
+    };
 
     window.FSA.Utilities = new Utilities();
-      
-    FSA.ViewModel = {
-        onDownloadClick: function ()
+
+
+    FSA.ViewModel = {       
+
+        Datasets: ko.observableArray(Utilities.Data.Datasets),
+
+        FeatureAlgorithm: ko.observableArray(Utilities.Data.FeatureAlgorithm),
+
+        ClassificationAlgorithm: ko.observableArray(Utilities.Data.ClassificationAlgorithm),
+
+        onClickDownloadDataset: function (dataset)
         {
             debugger;
-            FSA.Utilities.downloadFile('http://localhost:8020/AppData/Download.zip');
-            return true;       
+            var urllink = "http://localhost:8020/AppData/" + dataset.Download;
+            FSA.Utilities.downloadFile(urllink);
+            return true;
+        },
+
+        onClickStatisticalAnalysis: function (dataset)
+        {
+            var urllink = "http://localhost:8020/AppData/" + dataset.StatisticalAnalysis;
+            FSA.Utilities.ShowPicture(urllink);
+            return true;
+        },
+
+        onClickDownloadLink: function (algo)
+        {
+            var urllink = "http://localhost:8020/AppData/" + algo.DownloadLink;
+            FSA.Utilities.downloadFile(urllink);
+            return true;
+        },
+
+        onClickAnalysisLink: function (algo)
+        {
+            var urllink = "http://localhost:8020/AppData/" + algo.AnalysisLink;
+            FSA.Utilities.ShowPicture(urllink);
+            return true;
         }
     };
-    debugger;
-    ko.applyBindings(FSA.ViewModel);     
+
+    ko.applyBindings(FSA.ViewModel);
 });
 
-
-
-
-//function downloadFile(url)
-//{
-//    var link = document.createElement("a");  
-//    $(link).click(function (e)
-//    {
-//        e.preventDefault();
-//        window.open(url, 'popupwindow', 'scrollbars,resizable');       
-//    });
-//    $(link).click();    
-//}
-
-//window.downloadFile = function (sUrl)
-//{
-//    if (window.downloadFile.isChrome || window.downloadFile.isSafari)
-//    {
-//        var link = document.createElement('a');
-//        link.href = sUrl;
-//        if (link.download !== undefined)
-//        {
-//            var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
-//            link.download = fileName;
-//        }
-//        if (document.createEvent)
-//        {
-//            var e = document.createEvent('MouseEvents');
-//            e.initEvent('click', true, true);
-//            link.dispatchEvent(e);
-//            return true;
-//        }
-//    }
-//    var query = '?download';
-//    window.open(sUrl + query, '_self');
-//};
-
-//window.downloadFile.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-//window.downloadFile.isSafari = navigator.userAgent.toLowerCase().indexOf('safari') > -1;
 
 //$(document).ready(function ()
 //{

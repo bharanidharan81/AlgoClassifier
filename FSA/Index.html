@@ -43,58 +43,28 @@
                     <table>
                         <thead>
                             <tr>
-                                <td><strong> sl no </strong></td>
-                                <td><strong>Dataset </strong></td>
-                                <td><strong>#Feature </strong></td>
-                                <td><strong>#Observations </strong></td>
+                                <td class="wrapper align-left"><strong> sl no </strong></td>
+                                <td class="wrapper align-left"><strong>Dataset </strong></td>
+                                <td class="wrapper align-left"><strong>#Feature </strong></td>
+                                <td class="wrapper align-left"><strong>#Observations </strong></td>
                                 <td><strong>Download </strong></td>
                                 <td><strong>Statistical Analysis </strong></td>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>ALLAML</td>
-                            <td>7129</td>
-                            <td>72</td>
-                            <td> <input data-bind="click: onDownloadClick" id="downloadALLAML" type="button" class="button" value="Download link" /></td>
-                            <td> <input type="button" class="button" value="Picture link" /></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>ARCNENE</td>
-                            <td>10000</td>
-                            <td>200</td>
-                            <td> <input type="button" class="button" value="Download link" /></td>
-                            <td> <input type="button" class="button" value="Picture link" /></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>GLI-85</td>
-                            <td>22283</td>
-                            <td>85</td>
-                            <td> <input type="button" class="button" value="Download link" /></td>
-                            <td> <input type="button" class="button" value="Picture link" /></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>PROSTAT</td>
-                            <td>5966</td>
-                            <td>102</td>
-                            <td> <input type="button" class="button" value="Download link" /></td>
-                            <td> <input type="button" class="button" value="Picture link" /></td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>SMK-CAN-1987</td>
-                            <td>19993</td>
-                            <td>87</td>
-                            <td> <input type="button" class="button" value="Download link" /></td>
-                            <td> <input type="button" class="button" value="Picture link" /></td>
-                        </tr>
-                        <tfoot></tfoot>
+                        <tbody data-bind="foreach: Datasets">
+                            <tr>
+                                <td data-bind="text: slno" class="wrapper align-left" />
+                                <td data-bind="text: Dataset" class="wrapper align-left" />
+                                <td data-bind="text: Feature" class="wrapper align-left" />
+                                <td data-bind="text: Observations" class="wrapper align-left" />                             
+                                <td> <input data-bind="click: $root.onClickDownloadDataset" type="button" class="button" value="Download link" /></td>
+                                <td> <input data-bind="click: $root.onClickStatisticalAnalysis" type="button" class="button" value="Picture link" /></td>
+                            </tr>                            
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
                     </table>
-                    <br />
-                    <br />
+                    <br />                    
                 </div>
             </div>
             <div>
@@ -108,13 +78,15 @@
 
                     <div class="wrapper align-center">
                         <table>
-                            <tr>
-                                <td>
-                                    ARRE Algorithm
-                                </td>
-                                <td> <input type="button" class="button" value="Download" /></td>
-                                <td> <input type="button" class="button" value="Algorithm analysis" /></td>
-                            </tr>
+                            <thead></thead>
+                            <tbody data-bind="foreach: FeatureAlgorithm">
+                                <tr>
+                                    <td data-bind="text: Name" class="wrapper align-left" />      
+                                    <td> <input data-bind="click: $root.onClickDownloadLink" type="button" class="button" value="Download Link" /></td>
+                                    <td> <input data-bind="click: $root.onClickAnalysisLink" type="button" class="button" value="Algorithm analysis" /></td>
+                                </tr>
+                            </tbody>
+                            <tfoot></tfoot>
                         </table>
                     </div>
                     <br />
@@ -124,13 +96,15 @@
                     </div>
                     <div class="wrapper align-center">
                         <table>
-                            <tr>
-                                <td>
-                                    HSVM Classifier
-                                </td>
-                                <td> <input type="button" class="button" value="Download" /></td>
-                                <td> <input type="button" class="button" value="Algorithm analysis" /></td>
-                            </tr>
+                            <thead></thead>
+                            <tbody data-bind="foreach: ClassificationAlgorithm">
+                                <tr>
+                                    <td data-bind="text: Name" class="wrapper align-left" />
+                                    <td> <input data-bind="click: $root.onClickDownloadLink" type="button" class="button" value="Download Link" /></td>
+                                    <td> <input data-bind="click: $root.onClickAnalysisLink" type="button" class="button" value="Algorithm analysis" /></td>
+                                </tr>
+                            </tbody>
+                            <tfoot></tfoot>
                         </table>
                     </div>
                     <br />
@@ -142,10 +116,7 @@
     <!-- Footer -->
     <footer id="footer">
         <div class="inner">
-            <h3>Thank you</h3>
-            <div class="copyright">
-                &copy;
-            </div>
+            <h3>Thank you</h3>            
         </div>
     </footer>
 </body>
