@@ -118,19 +118,19 @@ $(function ()
     {
         var sampleData = {
             Datasets: [
-                { "slno": 1, "Dataset": "ALLAML", "Feature": "7129", "Observations": "72", "Download": "Download.zip", "StatisticalAnalysis": "ALLAML.jpg" },
-                { "slno": 2, "Dataset": "ARCNENE", "Feature": "10000", "Observations": "200", "Download": "ARCNENE.zip", "StatisticalAnalysis": "ARCNENE.jpg" },
-                { "slno": 3, "Dataset": "GLI-85", "Feature": "22283", "Observations": "85", "Download": "GLI85.zip", "StatisticalAnalysis": "GLI.jpg" },
-                { "slno": 4, "Dataset": "PROSTAT", "Feature": "5966", "Observations": "102", "Download": "PROSTAT.zip", "StatisticalAnalysis": "PROSTAT.jpg" },
-                { "slno": 5, "Dataset": "SMK-CAN-1987", "Feature": "19993", "Observations": "87", "Download": "SMKCAN1987.zip", "StatisticalAnalysis": "SMKCAN1987.jpg" }
+                { "slno": 1, "Dataset": "ALLAML", "Feature": "7129", "Observations": "72", "Download": "D1_ALLAML.zip", "StatisticalAnalysis": "ALLAML.jpg" },
+                { "slno": 2, "Dataset": "ARCNENE", "Feature": "10000", "Observations": "200", "Download": "D2_ARCENE.zip", "StatisticalAnalysis": "ARCNENE.jpg" },
+                { "slno": 3, "Dataset": "GLI-85", "Feature": "22283", "Observations": "85", "Download": "D3_GLI85.zip", "StatisticalAnalysis": "GLI.jpg" },
+                { "slno": 4, "Dataset": "PROSTAT", "Feature": "5966", "Observations": "102", "Download": "D4_PROSTATE_GE.zip", "StatisticalAnalysis": "PROSTAT.jpg" },
+                { "slno": 5, "Dataset": "SMK-CAN-1987", "Feature": "19993", "Observations": "87", "Download": "D5_SMK_CAN_187.zip", "StatisticalAnalysis": "SMKCAN1987.jpg" }
             ],
 
             FeatureAlgorithm: [
-                { "Name": "ARRE Algorithm", "DownloadLink": "ARREAlgorithm.zip", "AnalysisLink": "ARREAlgorithm.jpg" }
+                { "Name": "ARRE Algorithm", "DownloadLink": "FS_ARRE.zip", "AnalysisLink": "FSA_ANALYSIS.zip" }
             ],
 
             ClassificationAlgorithm: [
-                { "Name": "HSVM Classifier", "DownloadLink": "HSVMClassifier.zip", "AnalysisLink": "HSVMClassifier.jpg" }
+                { "Name": "HSVM Classifier", "DownloadLink": "CA_HSVM.zip", "AnalysisLink": "CA_HSVM_ANALYSIS.zip" }
             ]
         }; 
 
@@ -138,13 +138,20 @@ $(function ()
        
     })();
 
+    Utilities.prototype.downloadzip = function (surl)
+    {
+        $.fileDownload(surl)
+            .done(function () { alert('File download a success!'); })
+            .fail(function () { alert('File download failed!'); });
+    };
+
     Utilities.prototype.downloadFile = function (sUrl)
     {
         if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1 ||
             navigator.userAgent.toLowerCase().indexOf('safari') > -1)
         {
             var link = document.createElement('a');
-            link.href = sUrl;
+            link.href = sUrl;            
             if (link.download !== undefined)
             {
                 var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
@@ -175,6 +182,14 @@ $(function ()
 
     };
 
+    Utilities.prototype.downloadURI = function downloadURI(uri, name) 
+    {
+        var link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        link.click();
+    };
+
     window.FSA.Utilities = new Utilities();
 
 
@@ -187,33 +202,42 @@ $(function ()
         ClassificationAlgorithm: ko.observableArray(Utilities.Data.ClassificationAlgorithm),
 
         onClickDownloadDataset: function (dataset)
-        {
-            debugger;
-            var urllink = "http://localhost:8020/AppData/" + dataset.Download;
-            FSA.Utilities.downloadFile(urllink);
+        {                        
+            var linkref = $(location).attr('href');
+            var urlpath = linkref.substring(0, linkref.lastIndexOf('/') + 1);
+            var urlref = urlpath + "AppData/" + dataset.Download;
+            //alert(urlref);
+            FSA.Utilities.downloadzip(urlref);
             return true;
         },
-
-        onClickStatisticalAnalysis: function (dataset)
-        {
-            var urllink = "http://localhost:8020/AppData/" + dataset.StatisticalAnalysis;
-            FSA.Utilities.ShowPicture(urllink);
-            return true;
-        },
+                
 
         onClickDownloadLink: function (algo)
         {
-            var urllink = "http://localhost:8020/AppData/" + algo.DownloadLink;
-            FSA.Utilities.downloadFile(urllink);
+            var linkref = $(location).attr('href');
+            var urlpath = linkref.substring(0, linkref.lastIndexOf('/') + 1);
+            var urlref = urlpath + "AppData/" + algo.DownloadLink;            
+            //alert(urlref);
+            FSA.Utilities.downloadzip(urlref);
             return true;
         },
 
         onClickAnalysisLink: function (algo)
         {
-            var urllink = "http://localhost:8020/AppData/" + algo.AnalysisLink;
-            FSA.Utilities.ShowPicture(urllink);
+            var linkref = $(location).attr('href');
+            var urlpath = linkref.substring(0, linkref.lastIndexOf('/') + 1);
+            var urlref = urlpath + "AppData/" + algo.AnalysisLink;   
+            //alert(urlref);
+            FSA.Utilities.downloadzip(urlref);
             return true;
         }
+
+        //onClickStatisticalAnalysis: function (dataset)
+        //{
+        //    var urllink = $(location).attr('href') + "AppData/" + dataset.StatisticalAnalysis;
+        //    FSA.Utilities.ShowPicture(urllink);
+        //    return true;
+        //}
     };
 
     ko.applyBindings(FSA.ViewModel);
